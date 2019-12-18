@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 }
+      ];
+
+      function makeGreen() {
+        const p = document.querySelector("p");
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
+
+      // Regular
+      console.log("console.log(any)");
+
+      // Interpolated
+      console.log("console.log(i am %s)", "testing");
+
+      // Styled
+      console.log("%c styled log", "color:red");
+
+      // warning!
+      console.warn("console.warn(any)");
+
+      // Error :|
+      console.error("console.error(any)");
+
+      // Info
+      console.info("console.info(any)");
+
+      // Testing
+      console.assert(1 === 1, "true assert log");
+      console.assert(1 === 2, "false assert log");
+
+      // clearing
+      console.clear();
+
+      // Viewing DOM Elements
+      const p = document.querySelector("p");
+      console.log(p);
+      console.dir(p);
+
+      // Grouping together
+      dogs.forEach(dog => {
+        console.group(`${dog.name}`);
+        console.log(`Name: ${dog.name}`);
+        console.log(`Age: ${dog.age}`);
+        console.groupEnd(`${dog.name}`);
+      });
+      dogs.forEach(dog => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`Name: ${dog.name}`);
+        console.log(`Age: ${dog.age}`);
+        console.groupEnd(`${dog.name}`);
+      });
+
+      // counting
+      console.count("count");
+      console.count("testing");
+      console.count("count");
+      console.count("count");
+      console.count("testing");
+
+      // table
+      console.table(dogs);
+
+      // timing
+      console.time("fetching data");
+      fetch("https://api.github.com/users/zxxzyyz")
+        .then(data => data.json())
+        .then(data => {
+          console.timeEnd("fetching data");
+          console.log(data);
+        });
+
+      const now = performance.now();
+      fetch("https://api.github.com/users/zxxzyyz")
+        .then(data => data.json())
+        .then(data => {
+          const total = performance.now() - now;
+          console.log(total);
+          console.log(data);
+        });
+    </script>
+  </body>
+</html>
